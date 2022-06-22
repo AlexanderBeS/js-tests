@@ -58,3 +58,49 @@ console.log('test' in op)
 console.log('Before deleting', op)
 delete op.name;
 console.log('After deleting', op);
+
+
+
+
+
+
+//-------------------------------------
+//functions
+const log = text => `Log: ${text}`
+//console.log(log('TEST'))
+
+//check when function is called
+const fp = new Proxy(log, {
+    apply(target, thisArg, args) { //target = function, thisArg = context, args = params
+        console.log('Calling fn..')
+
+        return target.apply(thisArg, args); //не работает
+    }
+})
+
+console.log(fp('TEST'))
+
+
+
+
+
+//-------------------------------------
+//classes
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+const PersonProxy = new Proxy(Person, {
+    construct(target, argArray, newTarget) {
+        console.log('Construct');
+
+        return new target(...argArray) //new Person по сути
+    }
+})
+
+
+const p = new PersonProxy('Maxim', 30)
+console.log(p)
