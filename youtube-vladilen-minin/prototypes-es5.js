@@ -10,7 +10,7 @@ const Animal = function(options) {
     // }
 }
 
-//добавляем методы классу
+//добавляем методы класу
 //мы можем менять этот метод после
 Animal.prototype.voice = function () {
     console.log('Base voice from ', this.name);
