@@ -52,5 +52,72 @@ let baz = {
 };
 
 var bar = Object.create(baz);
-console.log(bar.something()); // Скажи что-нибудь хорошее...
+bar.something(); // Скажи что-нибудь хорошее...
 
+//----------------------------------
+function Foo1() {}
+let a1 = new Foo1();
+Foo1.prototype.constructor = function Gotcha(){};
+console.log(a1.constructor); // [Function: Gotcha]
+console.log(a1.constructor.name); // "Gotcha"
+console.log(a1); // {}
+
+
+
+
+
+
+
+
+
+
+
+
+//--классический ("прототипный") OO стиль:
+function Foo(who) {
+    this.me = who;
+}
+Foo.prototype.identify = function() {
+    return "I am " + this.me;
+};
+
+function Bar(who) {
+    Foo.call( this, who );
+}
+Bar.prototype = Object.create( Foo.prototype );
+
+Bar.prototype.speak = function() {
+    console.log( "Hello, " + this.identify() + "." );
+};
+
+var b1 = new Bar( "b1" );
+var b2 = new Bar( "b2" );
+
+b1.speak();
+b2.speak();
+
+
+
+//код в стиле OLOO(objects-linked-to-other-objects):
+var Foo2 = {
+    init: function(who) {
+        this.me = who;
+    },
+    identify: function() {
+        return "I am " + this.me;
+    }
+};
+
+var Bar2 = Object.create( Foo2 );
+
+Bar2.speak = function() {
+    console.log( "Hello, " + this.identify() + "." );
+};
+
+var b12 = Object.create( Bar2 );
+b12.init( "b12" );
+var b22 = Object.create( Bar2 );
+b22.init( "b22" );
+
+b12.speak();
+b22.speak();
