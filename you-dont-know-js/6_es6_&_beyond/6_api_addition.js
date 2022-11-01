@@ -155,6 +155,54 @@ o2.foo(); // foo
 
 
 //Статическая функция Object.assign(..)
+//из операции присваивания исключаются все свойства, которые не являются перечисляемыми и собственными.
+//enumerable: false
+
+//Объект Math
+
+//Объект Number
+//Number.isNaN(..)
+//Number.isFinite(..)
+
+//Статические функции, связанные с целыми числами
+//Числовые значения в JavaScript всегда имеют плавающую точку
+//Number.isInteger
+//В JavaScript разницы между значениями 4, 4., 4.0 и 4.0000 нет. Все
+// они будут рассматриваться как «целые» и давать значение true
+// при проверке функцией Number.isInteger(..).
+
+//Из-за обработки функцией Number.isInteger(..) значений NaN
+// и Infinity
+// определение функции isFloat(..) уже нельзя свести
+// к !Number.
+// isInteger(..). Приходится делать, к примеру, следую-
+// щие вещи:
+// function isFloat(x) {
+// return Number.isFinite( x ) && !Number.isInteger( x );
+// }
+// isFloat( 4.2 ); // true
+// isFloat( 4 ); // false
+// isFloat( NaN ); // false
+// isFloat( Infinity ); // false
+
+//Number.isSafeInteger(..) -> Number.MIN_SAFE_INTEGER...Number.MAX_SAFE_INTEGER
+//Math.pow( -2, 53 ) ... Math.pow( 2, 53 )
+
+//Объект String
+//Функция прототипа repeat(..)
+//"foo".repeat( 3 ); // "foofoofoo"
+
+//Функции проверки строки
+
+let palindrome = "step on no pets";
+console.log(palindrome.startsWith( "step on" )); // true
+console.log(palindrome.startsWith( "on", 5 )); // true
+console.log(palindrome.endsWith( "no pets" )); // true
+console.log(palindrome.endsWith( "no", 10 )); // true
+console.log(palindrome.includes( "on" )); // true
+console.log(palindrome.includes( "on", 6 )); // false
+
+
 
 
 
